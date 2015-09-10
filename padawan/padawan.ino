@@ -16,19 +16,25 @@
 
 const int botao = 2;
 const int potenciometro = A2;
+const int pinoSeletor = A3;
+const int pinoPWM = 9;
+
 #define TAMANHO_DISPLAY 7
 const int pinoDisplay[TAMANHO_DISPLAY] = {3,5,6,7,8,A4,A5};
 
 //modos
 const int modos = 3;
-const int MODO_1 = 1;
-const int MODO_2 = 2;
+const int LED_PWM = 0;
+const int DISPLAY_7SEG = 1;
+const int LEDS_RGB = 2;
 
 int modoAtual = 0;
 
 void setup() {
-  //inicializa botao
+  //inicializa botao, pino seletor e pino PWM
   pinMode(botao, INPUT);
+  pinMode(pinoSeletor, OUTPUT);
+  pinMode(pinoPWM, OUTPUT);
   //inicializa os LED's do display de 7 segmentos
   for (int item = 0; item < TAMANHO_DISPLAY; item++) {
     pinMode(pinoDisplay[item], OUTPUT);
@@ -37,10 +43,15 @@ void setup() {
 
 void loop() {
   while(modoAtual < modos) {
-    if(modoAtual == MODO_1) {
-      modo1();
-    } else if(modoAtual == MODO_2) {
-      modo2();
+    /*if(modoAtual == LED_PWM) {
+      //lePotAcionaPwm();
+    } else */
+    if(modoAtual == DISPLAY_7SEG) {
+      digitalWrite(pinoSeletor, LOW);
+      lePotAcendeLeds();
+    } else if(modoAtual == LEDS_RGB) {
+      digitalWrite(pinoSeletor, HIGH);
+      lePotAcendeLeds();
     }
     if(digitalRead(botao) == HIGH) {
       modoAtual = modoAtual + 1;
@@ -51,7 +62,24 @@ void loop() {
   delay(500);
 }
 
-void modo1() {
+void lePotAcionaPwm() {
+  /*
+  int valorPot = analogRead(potenciometro);
+  if (valorPot < 110) {
+    int valorSaida = map(valorPot, 0, 110, 0, 125);
+    analogWrite(pinoPWM, valorSaida);
+  } else if (1 == 2) {
+    int valorSaida = map(valorPot, 110, 220, 0, 500);
+    digitalWrite(pinoPWM, HIGH);
+    delay(valorSaida);
+    digitalWrite(pinoPWM, LOW);
+    delay(valorSaida);
+  }
+  delay(2);
+  */
+}
+
+void lePotAcendeLeds() {
   int valorPot = analogRead(potenciometro);
   int segmentoAMostrar = map(valorPot,0,255,0,8);
     

@@ -2,8 +2,8 @@
 //Changed 07 sep 2015
 //by Otavio Carneiro (carneiro.blog.br)
 //This code is in the public domain.
-const int analogInPin = A2;  // Analog input pin that the potentiometer is attached to
-const int outPin = 9; // Analog output pin that the LED is attached to
+const int analogInPin = A2;  // Analog input pin where the potentiometer is plugged into
+const int outPin = 9; // Analog output pin to which the LED is attached
 
 void setup() {
   pinMode (outPin, OUTPUT);

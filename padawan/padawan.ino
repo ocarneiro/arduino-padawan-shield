@@ -43,10 +43,9 @@ void setup() {
 
 void loop() {
   while(modoAtual < modos) {
-    /*if(modoAtual == LED_PWM) {
-      //lePotAcionaPwm();
-    } else */
-    if(modoAtual == DISPLAY_7SEG) {
+    if(modoAtual == LED_PWM) {
+      lePotAcionaPwm();
+    } else if(modoAtual == DISPLAY_7SEG) {
       digitalWrite(pinoSeletor, LOW);
       lePotAcendeLeds();
     } else if(modoAtual == LEDS_RGB) {
@@ -63,12 +62,11 @@ void loop() {
 }
 
 void lePotAcionaPwm() {
-  /*
   int valorPot = analogRead(potenciometro);
   if (valorPot < 110) {
     int valorSaida = map(valorPot, 0, 110, 0, 125);
     analogWrite(pinoPWM, valorSaida);
-  } else if (1 == 2) {
+  } else {
     int valorSaida = map(valorPot, 110, 220, 0, 500);
     digitalWrite(pinoPWM, HIGH);
     delay(valorSaida);
@@ -76,7 +74,6 @@ void lePotAcionaPwm() {
     delay(valorSaida);
   }
   delay(2);
-  */
 }
 
 void lePotAcendeLeds() {
@@ -88,16 +85,3 @@ void lePotAcendeLeds() {
   digitalWrite(pinoDisplay[segmentoAMostrar], LOW);
 }
 
-void modo2() {
-}
-  
-void test7segmentsDisplay() {
-
-  for (int item = 0; item < TAMANHO_DISPLAY; item++) {
-    digitalWrite(pinoDisplay[item], HIGH);
-    delay(500);
-    digitalWrite(pinoDisplay[item], LOW);
-  }
-
-  
-}
